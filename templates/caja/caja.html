@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Caja{% endblock %}
+
+{% block header_title %}
+    {% if sicia_name %}
+        {{ sicia_name }}
+    {% else %}
+        Clinica Del Caribe
+    {% endif %}
+{% endblock %}
+
+{% block page_header %}Módulo de Caja{% endblock %}
+{% block page_subheader %}Gestión de transacciones y facturación.{% endblock %}
+
+{% block main_content %}
+<div id="dynamic-content-area">
+    <h3>Seleccione una opción del menú de Procesos.</h3>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ url_for('static', filename='js/caja.js') }}"></script>
+{% endblock %}

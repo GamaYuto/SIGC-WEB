@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block header_title %}
+    {% if sicia_name %}
+        {{ sicia_name }}
+    {% else %}
+        Clinica Del Caribe
+    {% endif %}
+{% endblock %}
+
+{% block page_header %}INICIO{% endblock %}
+
+{% block page_subheader %}Sistema De Informacion Y Gestion Clinica{% endblock %}
+
+{% block main_content %}
+<div class="card-grid">
+    <a href="{{ url_for('caja_bp.caja') }}" class="card">
+        <i class="bi bi-cash-stack card-icon"></i>
+        <span class="card-title">CAJA</span>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,390 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-light: #f8f9fa;
+    --background-dark: #343a40;
+    --card-bg: #fff;
+    --card-hover-bg: #e9ecef;
+    --text-color-light: #212529;
+    --text-color-dark: #f8f9fa;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --border-radius: 10px;
+    --spacing-lg: 2rem;
+    --spacing-md: 1.5rem;
+    --spacing-sm: 1rem;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-color-light);
+    overflow-x: hidden; /* Evita el scroll horizontal al colapsar la barra lateral */
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #212529; /* Color de fondo más oscuro para la barra lateral */
+    color: var(--text-color-dark);
+    padding: var(--spacing-lg) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.logo-text {
+    margin-left: var(--spacing-sm);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.user-profile {
+    text-align: center;
+    padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+}
+
+.user-name {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+}
+
+.main-nav {
+    flex-grow: 1;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    color: var(--text-color-dark);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    margin-bottom: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.nav-active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.nav-link i {
+    font-size: 1.4rem;
+    margin-right: var(--spacing-sm);
+}
+
+.nav-link span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Estilos para submenús */
+.nav-submenu-toggle {
+    margin-bottom: 5px;
+}
+
+.nav-link.has-submenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submenu-arrow {
+    transition: transform 0.3s ease;
+}
+
+.submenu-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.submenu.active {
+    max-height: 200px;
+    padding: 5px 0;
+}
+
+.submenu-link {
+    display: block;
+    padding: 8px 15px;
+    color: var(--text-color-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.submenu-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.help-box {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+}
+
+.help-box h4, .help-box p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.webmail-btn {
+    display: block; /* Cambio a display block para ocupar todo el ancho */
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* Contenido Principal */
+.main-content {
+    flex-grow: 1;
+    padding: var(--spacing-lg);
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #20b2aa; /* Fondo azul/turquesa */
+    color: white;
+    padding: 0 20px;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-breadcrumb-container {
+    display: flex;
+    align-items: center;
+}
+
+.collapse-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: transform 0.3s ease;
+}
+
+.breadcrumbs {
+    font-weight: 500;
+}
+
+.breadcrumbs a, .breadcrumbs span {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.user-info {
+    font-weight: 500;
+}
+
+.page-content {
+    padding: var(--spacing-lg) 0;
+}
+
+.page-header h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0.5rem 0 0;
+    color: var(--secondary-color);
+}
+
+/* Grid y Tarjetas */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.card {
+    background-color: #20b2aa; /* Fondo turquesa para las tarjetas */
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+/* Estilos del formulario en caja.html */
+.form-container {
+    background-color: var(--card-bg);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin-top: var(--spacing-lg);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+}
+
+.form-actions {
+    margin-top: var(--spacing-md);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Estilos para el menú desplegable de usuario */
+.dropdown-menu-container {
+    position: relative;
+}
+
+.account-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotated {
+    transform: rotate(-180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    min-width: 150px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--card-hover-bg);
+}
+
+.dropdown-item i {
+    font-size: 1.1rem;
+}

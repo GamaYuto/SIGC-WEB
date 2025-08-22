@@ -1,0 +1,91 @@
+<div class="form-container">
+    <h3>Recibo De Caja - Provisional</h3>
+    <form id="recibo-form" action="{{ url_for('caja_bp.guardar_recibo') }}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="consecutivo">Consecutivo</label>
+                    <input type="text" id="consecutivo" name="consecutivo" class="form-control" value="{{ consecutivo }}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pagado_a">Pagado A*</label>
+                    <input type="text" id="pagado_a" name="pagado_a" class="form-control" value="{{ pagado_a }}" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id_usuario">ID*</label>
+                    <input type="text" id="id_usuario" name="id_usuario" class="form-control" value="{{ id_usuario }}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="centro_costo">Centro de costo</label>
+                    <select id="centro_costo" name="centro_costo" class="form-control">
+                        {% for cco in centros_costo %}
+                        <option value="{{ cco.ccocod }}">{{ cco.cconom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="rubros">Rubro</label>
+                    <select id="rubros" name="rubros" class="form-control">
+                        {% for rubro in rubros %}
+                        <option value="{{ rubro.rubcod }}">{{ rubro.rubnom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="valor">Valor*</label>
+                    <input type="number" id="valor" name="valor" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="concepto">Concepto*</label>
+                    <textarea id="concepto" name="concepto" rows="3" class="form-control" required></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Nuevo campo oculto para la firma -->
+        <input type="hidden" id="firma" name="firma">
+
+        <div class="form-actions">
+            <button type="button" class="btn-primary" id="guardar-recibo-btn">Guardar</button>
+            <button type="button" class="btn-secondary">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<!-- Modal para la firma -->
+<div id="firma-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="background: white; padding: 20px; border-radius: 10px; width: 400px; text-align: center;">
+    <h4>Firme aquí</h4>
+    <canvas id="firma-canvas" width="380" height="200" style="border: 1px solid black;"></canvas>
+    <br>
+    <button id="limpiar-firma-btn" class="btn-secondary">Limpiar</button>
+    <button id="aceptar-firma-btn" class="btn-primary">Aceptar</button>
+  </div>
+</div>

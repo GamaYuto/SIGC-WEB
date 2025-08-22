@@ -1,0 +1,18 @@
+services:
+  flask_app:
+    build:
+      context: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    environment:
+      - INFORMIX_SERVER=clinical_drda
+      - INFORMIX_USER=informix
+      - INFORMIX_PASSWORD=migracion
+      - INFORMIX_DATABASE=prueba
+      - INFORMIX_HOST=192.168.0.186 # ⬅️ Dirección IP de tu servidor real
+      - INFORMIX_PORT=1526 # ⬅️ Puerto real de tu servidor
+      - FLASK_DEBUG=1
+    volumes:
+      - .:/app
+    command: python -m app.app

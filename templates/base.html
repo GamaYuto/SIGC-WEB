@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SIGC{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <i class="bi bi-heart-pulse-fill logo-icon"></i>
+                <h1 class="logo-text">SIGC</h1>
+            </header>
+
+            <div class="user-profile">
+                <i class="bi bi-person-circle profile-icon"></i>
+                <h3 class="user-name">Osvaldo Gamarra Salinas</h3>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="{{ url_for('home') }}" class="nav-link {% if active_page == 'home' %}nav-active{% endif %}">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>INICIO</span>
+                </a>
+                <a href="{{ url_for('caja_bp.caja') }}" class="nav-link {% if active_page == 'caja' %}nav-active{% endif %}">
+                    <i class="bi bi-cash-stack"></i>
+                    <span>CAJA</span>
+                </a>
+                
+                {# Muestra el submenú solo si la página activa es 'caja' #}
+                {% if active_page == 'caja' %}
+                <div class="nav-submenu-toggle">
+                    <a href="#" class="nav-link has-submenu" onclick="toggleSubmenu('procesos-submenu')">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>PROCESOS</span>
+                        <i class="bi bi-chevron-down submenu-arrow"></i>
+                    </a>
+                    <div id="procesos-submenu" class="submenu">
+                        <a href="#" class="submenu-link" data-content="recibos-provisionales">RP Recibos Provisionales</a>
+                        <a href="#" class="submenu-link" data-content="gestion-recibos">GR Gestion De Recibos</a>
+                        <a href="#" class="submenu-link" data-content="recibos-legalizados">RL Recibos Legalizados</a>
+                    </div>
+                </div>
+
+                <div class="nav-submenu-toggle">
+                    <a href="#" class="nav-link has-submenu" onclick="toggleSubmenu('reportes-submenu')">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                        <span>REPORTES</span>
+                        <i class="bi bi-chevron-down submenu-arrow"></i>
+                    </a>
+                    <div id="reportes-submenu" class="submenu">
+                        <a href="#" class="submenu-link" data-content="recibos-por-rango">RPR Recibos Por Rango</a>
+                    </div>
+                </div>
+                {% endif %}
+            </nav>
+
+            <div class="help-box">
+                <h4>¿Necesita Ayuda?</h4>
+                <p>Ext: 454 - 403</p>
+                <a href="mailto:correo@ejemplo.com" class="webmail-btn">
+                    <i class="bi bi-envelope-fill"></i> Acceso a Webmail
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-breadcrumb-container">
+                    <div class="collapse-icon" onclick="toggleSidebar()">
+                        <i class="bi bi-chevron-left"></i>
+                    </div>
+                    <div class="breadcrumbs">
+                        <span>{% block header_title %}Clinica Del Caribe{% endblock %}</span>
+                    </div>
+                </div>
+                <div class="user-info dropdown-menu-container">
+                    <span class="account-link" onclick="toggleDropdown()">
+                        {{ session.get('NombreCompleto', 'Mi Cuenta') }}
+                        <i class="bi bi-chevron-down dropdown-arrow"></i>
+                    </span>
+                    <div class="dropdown-menu" id="user-dropdown">
+                        <a href="#" class="dropdown-item">
+                            <i class="bi bi-person-fill"></i> Mi Cuenta
+                        </a>
+                        <a href="{{ url_for('auth_bp.logout') }}" class="dropdown-item">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </a>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="page-content">
+                <div class="page-header">
+                    <h2>{% block page_header %}{% endblock %}</h2>
+                    <p>{% block page_subheader %}{% endblock %}</p>
+                </div>
+                {% block main_content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.classList.toggle('active');
+            const arrow = submenu.previousElementSibling.querySelector('.submenu-arrow');
+            arrow.classList.toggle('rotated');
+        }
+
+        function toggleSidebar() {
+            document.body.classList.toggle('collapsed-sidebar');
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('show');
+            const arrow = document.querySelector('.dropdown-arrow');
+            arrow.classList.toggle('rotated');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.account-link, .account-link *')) {
+                const dropdown = document.getElementById('user-dropdown');
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                    const arrow = document.querySelector('.dropdown-arrow');
+                    arrow.classList.remove('rotated');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
